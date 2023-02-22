@@ -1,0 +1,60 @@
+<table class="full-width">
+  <tr>
+    <td colspan="4">
+      <mat-form-field class="full-width">
+        <mat-label>Name</mat-label>
+        <input type="string" matInput [(ngModel)]="name">
+      </mat-form-field>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="4">
+        <table class="full-width ingredient-table">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Quantity</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let recipeIngredient of recipeIngredients">
+          <td>{{recipeIngredient.ingredient.name}}</td>
+          <td>{{recipeIngredient.quantity}}x {{recipeIngredient.ingredient.unit}}(s)</td>
+        </tr>
+        </tbody>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <mat-select [(ngModel)]="selectedIngredient" class="full-width">
+        <mat-option *ngIf="selectedIngredient === EMPTY_INGREDIENT"
+                    [value]="selectedIngredient">{{selectedIngredient.name}}</mat-option>
+        <mat-option *ngFor="let availableIngredient of getAvailableIngredients()"
+                    [value]="availableIngredient">{{availableIngredient.name}}</mat-option>
+      </mat-select>
+    </td>
+    <td>
+      <mat-form-field class="full-width">
+        <mat-label>Quantity</mat-label>
+        <input type="number" matInput [(ngModel)]="quantity">
+      </mat-form-field>
+    </td>
+    <td>
+      <ng-container *ngIf="selectedIngredient === EMPTY_INGREDIENT; else displayUnit" class="full-width">
+        Create an ingredient first...
+      </ng-container>
+      <ng-template #displayUnit class="full-width">{{selectedIngredient.unit}}(s)</ng-template>
+    </td>
+    <td class="buttons">
+      <button mat-button color="primary" (click)="addIngredient()" class="full-width">Add Ingredient</button>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="4" class="buttons">
+      <button mat-button (click)="cancel()">Cancel</button>
+      &nbsp;
+      <button mat-raised-button color="primary" (click)="addRecipe()">Add Recipe</button>
+    </td>
+  </tr>
+</table>

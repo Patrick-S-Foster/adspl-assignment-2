@@ -1,0 +1,13 @@
+table {
+  border-spacing: 20px 10px;
+  table-layout: fixed;
+}
+
+.buttons {
+  text-align: right;
+}
+
+.ingredient-table,
+.ingredient-table td {
+  border: thin solid black;
+}

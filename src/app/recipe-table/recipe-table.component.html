@@ -1,0 +1,27 @@
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Ingredients</th>
+    <th>Expenses</th>
+    <th>Markup (20%)</th>
+    <th>Tax (10%)</th>
+    <th>Total Price</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let recipe of getRecipes()">
+    <td>{{recipe.name}}</td>
+    <td>
+      <ul>
+        <li *ngFor="let recipeIngredient of recipe.recipeIngredients">{{recipeIngredient.quantity}}x
+          {{recipeIngredient.ingredient.name}}</li>
+      </ul>
+    </td>
+    <td>€{{getExpense(recipe).toFixed(2)}}</td>
+    <td>€{{getMarkup(recipe).toFixed(2)}}</td>
+    <td>€{{getTax(recipe).toFixed(2)}}</td>
+    <td>€{{getTotal(recipe).toFixed(2)}}</td>
+  </tr>
+  </tbody>
+</table>
